@@ -6,46 +6,60 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:36:59 by pabalons          #+#    #+#             */
-/*   Updated: 2024/10/09 12:43:43 by pabalons         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:23:46 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*fill_buffer(void)
+	
+static char	*fill_line(int fd, char *lefts, char *buff )
 {
-	static char	*lb1;
+	int	check;
+	char	*tmp;
+	
+	check = 1;
+
+	while (check > 1)
+	{
+		check = read(fd, buff, BUFFER_SIZE);
+		if(check == -1)
+		{
+			free(lefts);
+			return (NULL);
+		}
+		else if (check == 0)
+			break;
+		buff[check] = 0;
+		
+	}
 
 	
-	return (lb1);
-}
-
-char	*set_line(char *lb1)
-{
-	return (lb1);
+	
+	return (tmp);
 }
 
 char	*get_next_line(int fd)
 {
+	static char *lefts;
+	char	*res_line;
 	char	*buff;
 
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!fd || fd < 0 ||)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		
+		free(lefts);
+		free(buff);
+		return NULL;
 	}
-	
 	if (!buff)
 		return (NULL);
-	if (fd == -1)
+	res_line =  fill_line(fd, lefts , buff);
+	free(buff);
+	buff = NULL;
+	if (!res_line)
 		return (NULL);
-	else
-		while (read(fd, buff, BUFFER_SIZE) > 0)
-		{
-			if (*buff == '\n')
-				break ;
-		}
-	return (buff);
+	return (res_line);
 }
 
 int	main(void)

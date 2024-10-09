@@ -2,18 +2,17 @@
 
 ## Overview
 
-This project is focused on creating a program that reads a line from a document
-
+Ths 
 
 ## Project Structure
 
 Below is a breakdown of each C file in this repository and its purpose:
 
-| File                        | Description                                                                                              |
+| File                        | Description                                                                   |
 |-----------------------------|----------------------------------------------------------------------------------------------------------|
-| **`ft_atoi.c`**              | Implements the conversion of a string to an integer.                            |
-| **`ft_bzero.c`**             | Sets a block of memory to zero.                                       |
-| **`ft_calloc.c`**            | Allocates memory and initializes it to zero.                 |
+| **`get_next_line_utils.c`**              | Implements the functions that our main function **`get_next_line`** uses.                            |
+| **`get_next_line.c`**             | Main function of the proyect..                                       |
+| **`get_next_line.h`**            | Allocates memory and initializes it to zero.                 |
 
 
 ## Getting Started
