@@ -6,34 +6,22 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:36:57 by pabalons          #+#    #+#             */
-/*   Updated: 2024/10/09 10:33:28 by pabalons         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:38:07 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
-}
-
+//Duplica la cacdena de caracteres y devuelv un puntero a la nueva cadena//
 char	*ft_strdup(const char *s)
 {
 	char	*ptr;
 	size_t	len;
 	size_t	i;
 
-	len = 0;
-	while (s[len])
-		len++;
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
 	ptr = (char *)malloc((len + 1) * sizeof(char));
 	if (!ptr)
 		return (NULL);
@@ -47,6 +35,7 @@ char	*ft_strdup(const char *s)
 	return (ptr);
 }
 
+//Devuelve la en de la cadena//
 size_t	ft_strlen(const char *s)
 {
 	int	i;
@@ -59,7 +48,7 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
-
+// Devuelve una subcadena de la cadena de entrada 's' que comienza en la posición 'start' y tiene una longitud máxima de 'len'.
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
@@ -81,6 +70,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
+//Concatena strings s1 en s2//
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*new_str;
@@ -103,6 +93,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new_str[++i] = '\0';
 	return (new_str);
 }
+//Copia  una caadena origen en una dest"""
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	len;
