@@ -6,7 +6,7 @@
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:36:57 by pabalons          #+#    #+#             */
-/*   Updated: 2024/10/14 12:38:07 by pabalons         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:34:54 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
-// Devuelve una subcadena de la cadena de entrada 's' que comienza en la posición 'start' y tiene una longitud máxima de 'len'.
+
+// Devuelve una subcadena de la cadena de entrada 's' que comienza 
+//en la posición 'start' y tiene una longitud máxima de 'len'.
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
@@ -93,6 +95,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new_str[++i] = '\0';
 	return (new_str);
 }
+
 //Copia  una caadena origen en una dest"""
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
