@@ -1,48 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabalons <pabalons@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:41:53 by pabalons          #+#    #+#             */
-/*   Updated: 2024/10/17 13:25:39 by pabalons         ###   ########.fr       */
+/*   Updated: 2024/10/17 12:25:00 by pabalons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static char	*fill_buffer(int fd, char *left_c, char *buff);
-static char	*fill_line(char *line);
-static char	*ft_strchr(const char *s, int c);
-
-char	*get_next_line(int fd)
+static char	*ft_strchr(const char *s, int c)
 {
-	static char	*lefts;
-	char		*line;
-	char		*buff;
-
-	buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
-		return (NULL);
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	while (*s)
 	{
-		if (lefts != NULL)
-		{
-			free(lefts);
-		}
-		free(buff);
-		return (lefts = NULL, NULL);
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
-	line = fill_buffer(fd, lefts, buff);
-	free(buff);
-	if (!line)
-	{
-		free(lefts);
-		return (lefts = NULL, NULL);
-	}
-	lefts = fill_line(line);
-	return (line);
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
 
 static char	*fill_line(char *line_buff)
@@ -90,17 +70,33 @@ static char	*fill_buffer(int fd, char *lefts, char *buff)
 	return (lefts);
 }
 
-static char	*ft_strchr(const char *s, int c)
+char	*get_next_line(int fd)
 {
-	while (*s)
+	static char	*lefts[1024];
+	char		*line;
+	char		*buff;
+
+	buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (lefts[fd] != NULL)
+		{
+			free(lefts[fd]);
+		}
+		free(buff);
+		return (lefts[fd] = NULL, NULL);
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	line = fill_buffer(fd, lefts[fd], buff);
+	free(buff);
+	if (!line)
+	{
+		free(lefts[fd]);
+		return (lefts[fd] = NULL, NULL);
+	}
+	lefts[fd] = fill_line(line);
+	return (line);
 }
 
 // int	main(void)
