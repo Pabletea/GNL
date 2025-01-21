@@ -61,8 +61,6 @@ You can use the provided test cases or create your own to verify the functionali
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
 
-## License
-This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
